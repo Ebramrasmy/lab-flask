@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #393a8d;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #3a3ca7;
+            color: white;
+        }
+        a {
+            text-decoration: none;
+            color: #15176b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Companies</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Industry</th>
+            <th>Employees</th>
+        </tr>
+        {% for company in companies %}
+        <tr>
+            <td>{{ company.id }}</td>
+            <td><a href="/company/{{ company.id }}">{{ company.name }}</a></td>
+            <td>{{ company.location }}</td>
+            <td>{{ company.industry }}</td>
+            <td>{{ company.employees }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Back to Jobs</a>
+</body>
+</html>
