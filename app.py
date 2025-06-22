@@ -1,47 +1,39 @@
 from flask import Flask, render_template
+from flask_wtf import FlaskForm
+from wtforms import StringField, IntegerField, SubmitField
+from wtforms.validators import DataRequired
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 
-jobs = [
-    {
-        'id': 1,
-        'title': 'Software Engineer',
-        'location': 'Cairo',
-        'company': 'Tech Company'
-    },
-    {
-        'id': 2,
-        'title': 'Data Scientist',
-        'location': 'Alexandria',
-        'company': 'Data Corp'
-    },
-    {
-        'id': 3,
-        'title': 'Web Developer',
-        'location': 'Zagazig',
-        'company': 'Web Solutions'
-    },
-    {
-        'id': 4,
-        'title': 'Mobile Developer',
-        'location': 'Cairo',
-        'company': 'App Innovations'
-    },
-    {
-        'id': 5,
-        'title': 'DevOps Engineer',
-        'location': 'Giza',
-        'company': 'Cloud Services'
-    }
-]
 
-companies = [
-    {'id': 1, 'name': 'Tech Company', 'location': 'Cairo', 'industry': 'Software', 'employees': 120},
-    {'id': 2, 'name': 'Data Corp', 'location': 'Alexandria', 'industry': 'Analytics', 'employees': 90},
-    {'id': 3, 'name': 'Web Solutions', 'location': 'Zagazig', 'industry': 'Web Development', 'employees': 60},
-    {'id': 4, 'name': 'App Innovations', 'location': 'Cairo', 'industry': 'Mobile Apps', 'employees': 75},
-    {'id': 5, 'name': 'Cloud Services', 'location': 'Giza', 'industry': 'Cloud Computing', 'employees': 110}
-]
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SECRET_KEY'] = 'super_secret_key_iti'
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+class Company(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    location = db.Column(db.String(100), nullable=False)
+    industry = db.Column(db.String(100), nullable=False)
+    employees = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return f"<Company {self.name}>"
+
+class Job(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    location = db.Column(db.String(100), nullable=False)
+    company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
+    company = db.relationship('Company', backref='jobs')
+
+    def __repr__(self):
+        return f"<Job {self.title}>"
+
+
 
 @app.route('/', methods = ['GET'])
 def list_jobs():
