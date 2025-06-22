@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 100px;
+        }
+
+        h1 {
+            color: #3a3ca7;
+            font-size: 3em;
+        }
+
+        .buttons {
+            margin-top: 50px;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px 40px;
+            font-size: 1.2em;
+            background-color: #3a3ca7;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background-color: #2e2f8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Job Portal</h1>
+    <p>Choose where you want to go:</p>
+
+    <div class="buttons">
+        <a href="{{ url_for('list_jobs') }}" class="button">Go to Jobs</a>
+        <a href="{{ url_for('list_companes') }}" class="button">Go to Companies</a>
+    </div>
+</body>
+</html>

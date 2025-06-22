@@ -38,6 +38,6 @@
         <p><strong>Industry:</strong> {{ company.industry }}</p>
         <p><strong>Employees:</strong> {{ company.employees }}</p>
     </div>
-    <a href="/companies">Back to Companies</a>
+    <a href="{{ url_for('list_companes') }}" style="display:inline-block; margin-top:20px; padding:10px 20px; background-color:#3a3ca7; color:white; border-radius:5px; text-decoration:none;">Back to Companies</a>
 </body>
 </html>

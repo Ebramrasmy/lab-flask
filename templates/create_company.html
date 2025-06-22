@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Company</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #393a8d;
+        }
+        form {
+            display: inline-block;
+            text-align: left;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+        input {
+            width: 300px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        input[type="submit"] {
+            background-color: #3a3ca7;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create a New Company</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>{{ form.name.label }}<br>{{ form.name() }}</p>
+        <p>{{ form.location.label }}<br>{{ form.location() }}</p>
+        <p>{{ form.industry.label }}<br>{{ form.industry() }}</p>
+        <p>{{ form.employees.label }}<br>{{ form.employees() }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <br>
+    <a href="{{ url_for('list_companes') }}">Back to Companies</a>
+</body>
+</html>

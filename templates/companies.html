@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Companies</title>
     <style>
         body {
@@ -12,30 +11,63 @@
             text-align: center;
             padding: 50px;
         }
+
         h1 {
             color: #393a8d;
         }
+
+        a.button {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #3a3ca7;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
         table {
             width: 80%;
             margin: 20px auto;
             border-collapse: collapse;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
         }
+
         th, td {
+            padding: 12px;
             border: 1px solid #ddd;
-            padding: 8px;
         }
+
         th {
             background-color: #3a3ca7;
             color: white;
         }
-        a {
+
+        td a {
+            color: #3a3ca7;
             text-decoration: none;
-            color: #15176b;
+        }
+
+        td a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            margin-top: 20px;
+            display: block;
+            color: #3a3ca7;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
     <h1>Companies</h1>
+
+    <a href="{{ url_for('create_company') }}" class="button">+ Add New Company</a>
+
     <table>
         <tr>
             <th>ID</th>
@@ -47,13 +79,13 @@
         {% for company in companies %}
         <tr>
             <td>{{ company.id }}</td>
-            <td><a href="/company/{{ company.id }}">{{ company.name }}</a></td>
+            <td><a href="{{ url_for('company_detail', id=company.id) }}">{{ company.name }}</a></td>
             <td>{{ company.location }}</td>
             <td>{{ company.industry }}</td>
             <td>{{ company.employees }}</td>
         </tr>
         {% endfor %}
     </table>
-    <a href="/">Back to Jobs</a>
+
 </body>
 </html>
